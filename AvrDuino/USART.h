@@ -31,10 +31,14 @@ class USART{
 		UBRRL = value; 
 	}
 
-	char read()
+	uint8_t read()
 	{   
-		while ((UCSRA & (1 << RXC)) == 0); 
-		return UDR;
+		//while ((UCSRA & (1 << RXC)) == 0); 
+		
+			return UDR;
+		
+		
+		
 	}
 	
 	void send(char datam)
@@ -51,6 +55,18 @@ class USART{
 				send(str[i]);
 				i++;
 			  }
+	}
+	
+	int available()
+	{
+		if ((UCSRA & (1 << RXC)) == 0)
+		{
+			return 0;
+		}
+		else{
+			return 1;
+		}
+		
 	}
 
 }Serial;
